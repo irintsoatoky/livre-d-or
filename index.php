@@ -31,41 +31,43 @@ require 'elements/header.php';
     <h1>Livre d'or</h1>
 
     <?php if ($success) : ?>
-        <div class="alert alert-success">
-            Merci pour votre message
-        </div>
+    <div class="alert alert-success">
+        Merci pour votre message
+    </div>
     <?php elseif (!empty($errors)) : ?>
-        <div class="alert alert-danger">
-            Formulaire invalide
-        </div>
+    <div class="alert alert-danger">
+        Formulaire invalide
+    </div>
     <?php endif ?>
 
     <form action="./index.php" method="GET">
         <div class="form-group">
             <?php require_once 'class/Message.php'; ?>
-            <input value="<?= htmlentities($_GET['username'] ?? '') ?>" type="text" name="username" placeholder="Votre pseudo" class="form-control">
+            <input value="<?= htmlentities($_GET['username'] ?? '') ?>" type="text" name="username"
+                placeholder="Votre pseudo" class="form-control">
             <?php if (isset($errors['username'])) : ?>
-                <div class="article" style="color:red">
-                    <?= $errors['username'] ?>
-                </div>
+            <div class="article" style="color:red">
+                <?= $errors['username'] ?>
+            </div>
             <?php endif ?>
         </div>
-        <div class="form-group">
-            <textarea name="message" placeholder="Votre pseudo" class="form-control"><?= htmlentities($_GET['message'] ?? '') ?></textarea>
+        <div class="form-group mt-2">
+            <textarea name="message" placeholder="Votre message"
+                class="form-control"><?= htmlentities($_GET['message'] ?? '') ?></textarea>
             <?php if (isset($errors['message'])) : ?>
-                <div class="article" style="color:red">
-                    <?= $errors['message'] ?>
-                </div>
+            <div class="article" style="color:red">
+                <?= $errors['message'] ?>
+            </div>
             <?php endif ?>
         </div>
-        <button class="btn btn-primary">Envoyer</button>
+        <button class="btn btn-primary mt-2">Envoyer</button>
     </form>
 
     <?php if(!empty($messages)): ?>
     <h1 class="mt-4">Vos messages</h1>
-    
+
     <?php foreach($messages as $message): ?>
-        <?= $message->toHTML() ?>
+    <?= $message->toHTML() ?>
     <?php endforeach ?>
 
     <?php endif ?>
